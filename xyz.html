@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Ranking</title>
+</head>
+<body>
+    <h2>Upload Job Description and Resumes</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Job Description:</label>
+        <input type="file" name="job_description" required><br><br>
+
+        <label>Resumes:</label>
+        <input type="file" name="resumes" multiple required><br><br>
+
+        <button type="submit">Rank Resumes</button>
+    </form>
+
+    {% if results %}
+    <h3>Resume Ranking Results:</h3>
+    <hr>
+    {% for resume in results %}
+        <p>{{ forloop.counter }}. {{ resume.name }} | Score: {{ resume.score }}</p>
+    {% endfor %}
+{% endif %}
+</body>
+</html>
+
+
